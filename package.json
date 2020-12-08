@@ -1,0 +1,27 @@
+{
+  "name": "duty-ical",
+  "version": "1.0.0",
+  "description": "duty ical genereate",
+  "main": "./build/src/calendar.js",
+  "bin": {
+    "duty-ical": "./build/src/bin.js"
+  },
+  "author": "xmmwc@qq.com",
+  "license": "MIT",
+  "scripts": {
+    "prepublish": "tsc",
+    "build:release": "mv $(npm pack | tail -n 1) ./release"
+  },
+  "dependencies": {
+    "chinese-holidays": "^1.2.1",
+    "commander": "^6.2.0",
+    "date-fns": "^2.16.1",
+    "express": "^4.17.1",
+    "ics": "^2.26.2"
+  },
+  "devDependencies": {
+    "@types/commander": "^2.12.2",
+    "@types/express": "^4.17.9",
+    "@types/node": "^14.14.10"
+  }
+}
