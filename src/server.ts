@@ -11,8 +11,20 @@ export default (options: IServerOptions) => {
     port: 9090
   }
   const opts = Object.assign({}, defaultOptions, options)
+
+  app.use('/calendar', (req, res, next) => {
+    calendar({
+      ...opts
+    }).then((data) => {
+      res.set('content-type', 'text/calendar')
+      res.send(data)
+    }).catch(err => {
+      next(err)
+    })
+  })
+
   app.use('/calendar/:name', (req, res, next) => {
-    const filter = req.params.name || ''
+    const filter = req.params.name
     console.log(`search for ${filter}`)
     calendar({
       ...opts,

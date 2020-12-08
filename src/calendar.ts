@@ -43,14 +43,14 @@ const getPlan = (names: string[], workingDays: Date[], namePerDay: number): IWor
       date: day,
       names: []
     }
+    if (pool.length < namePerDay) {
+      pool = [...pool, ...names]
+    }
     for (let index = 0; index < namePerDay; index++) {
-      if (pool.length < 1) {
-        pool = [...names]
-      }
-      const name = pool.shift()
-      plan.names.push(name)
+      plan.names.push(pool[index])
     }
     workingPlan.push(plan)
+    pool.shift()
   }
   return workingPlan
 }
