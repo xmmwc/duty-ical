@@ -12,9 +12,12 @@ export default (options: IServerOptions) => {
   }
   const opts = Object.assign({}, defaultOptions, options)
 
-  app.use('/calendar', (req, res, next) => {
+  app.use('/calendar/:name', (req, res, next) => {
+    const filter = req.params.name
+    console.log(`search for ${filter}`)
     calendar({
-      ...opts
+      ...opts,
+      filter
     }).then((data) => {
       res.set('content-type', 'text/calendar')
       res.send(data)
@@ -23,12 +26,9 @@ export default (options: IServerOptions) => {
     })
   })
 
-  app.use('/calendar/:name', (req, res, next) => {
-    const filter = req.params.name
-    console.log(`search for ${filter}`)
+  app.use('/calendar', (req, res, next) => {
     calendar({
-      ...opts,
-      filter
+      ...opts
     }).then((data) => {
       res.set('content-type', 'text/calendar')
       res.send(data)
