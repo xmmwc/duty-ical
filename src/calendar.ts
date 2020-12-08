@@ -66,7 +66,8 @@ export default async (options: ICalenderOptions) => {
   const opts = Object.assign({}, defaultOptions, options)
   const workingDays = await getWorkingDays(opts.start, opts.duration)
   const plans = getPlan(opts.name, workingDays, opts.number)
-  const events: any = plans.filter(plan => !opts.filter || plan.names.indexOf(opts.filter)).map(plan => {
+  const filterPlans = opts.filter ? plans.filter(plan => plan.names.indexOf(opts.filter) >= 0) : plans
+  const events: any = filterPlans.map(plan => {
     const year = dateFns.getYear(plan.date)
     const month = dateFns.getMonth(plan.date) + 1
     const day = dateFns.getDate(plan.date)

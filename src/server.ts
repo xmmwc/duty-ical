@@ -13,6 +13,7 @@ export default (options: IServerOptions) => {
   const opts = Object.assign({}, defaultOptions, options)
   app.use('/calendar/:name', (req, res, next) => {
     const filter = req.params.name || ''
+    console.log(`search for ${filter}`)
     calendar({
       ...opts,
       filter
