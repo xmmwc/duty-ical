@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import commander from 'commander'
 import * as dateFns from 'date-fns'
 import server from './server'
