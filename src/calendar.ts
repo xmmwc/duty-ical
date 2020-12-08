@@ -18,6 +18,7 @@ interface IWorkingPlan {
 const EVENT_TEMPLATE = {
   title: '值班日程',
   busyStatus: 'FREE',
+  startOutputType: 'local',
   status: 'CONFIRMED',
   duration: {
     hours: 3
