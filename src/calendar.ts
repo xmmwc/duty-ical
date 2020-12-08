@@ -3,7 +3,7 @@ import * as dateFns from 'date-fns'
 import * as ics from 'ics'
 
 export interface ICalenderOptions {
-  name: string[]
+  names: string[]
   start?: string
   duration?: number
   number?: number
@@ -57,7 +57,7 @@ const getPlan = (names: string[], workingDays: Date[], namePerDay: number): IWor
 
 export default async (options: ICalenderOptions) => {
   const defaultOptions: ICalenderOptions = {
-    name: [],
+    names: [],
     start: dateFns.format(Date.now(), 'yyyy-MM-dd'),
     duration: 365,
     number: 3,
@@ -65,7 +65,7 @@ export default async (options: ICalenderOptions) => {
   }
   const opts = Object.assign({}, defaultOptions, options)
   const workingDays = await getWorkingDays(opts.start, opts.duration)
-  const plans = getPlan(opts.name, workingDays, opts.number)
+  const plans = getPlan(opts.names, workingDays, opts.number)
   const filterPlans = opts.filter ? plans.filter(plan => plan.names.indexOf(opts.filter) >= 0) : plans
   const events: any = filterPlans.map(plan => {
     const year = dateFns.getYear(plan.date)
